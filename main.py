@@ -67,23 +67,25 @@ async def voice_webhook(request: Request):
     
     # Generate TwiML response
     twiml_response = f'''<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-        <Say voice="Polly.Aditi" language="hi-IN">
-            Namaste! City Smart Bus Info mein aapka swagat hai. 
-            Kaise madad kar sakte hain? Apna sawal puchiye.
-        </Say>
-        <Record 
-            maxLength="30" 
-            action="{str(request.base_url).rstrip('/')}/process_audio" 
-            method="POST" 
-            playBeep="true" 
-            timeout="3"
-            finishOnKey="#"
-        />
-        <Say voice="Polly.Aditi" language="hi-IN">
-            Maaf kijiye, kuch samay ke liye hum upalabdh nahin hain. Dhanyawaad!
-        </Say>
-    </Response>'''
+<Response>
+    <Say voice="Polly.Aditi" language="hi-IN">
+        Namaste! City Smart Bus Info mein aapka swagat hai. 
+        Kaise madad kar sakte hain? Apna sawal puchiye.
+    </Say>
+    <Record 
+        maxLength="30" 
+        action="https://b09d33f6cf08.ngrok-free.app/process_audio" 
+        method="POST" 
+        playBeep="true" 
+        timeout="3"
+        finishOnKey="#"
+    />
+    <Say voice="Polly.Aditi" language="hi-IN">
+        Maaf kijiye, kuch samay ke liye hum upalabdh nahin hain. Dhanyawaad!
+    </Say>
+</Response>'''
+
+    
     
     return Response(content=twiml_response, media_type="application/xml")
 
